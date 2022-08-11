@@ -1,0 +1,89 @@
+// /* stylelint-disable */
+
+// @mixin for-desktop {
+//   @media (min-width: (1025px)) {
+//     @content;
+//   }
+// }
+
+// @mixin big-desktop {
+//   @media (max-width: (1440px)) {
+//     @content;
+//   }
+// }
+
+// @mixin high-desktop {
+//   @media (max-width: (1200px)) {
+//     @content;
+//   }
+// }
+
+// @mixin tablet {
+//   @media (max-width: (1024px)) {
+//     @content;
+//   }
+// }
+
+// @mixin high-tablet {
+//   @media (max-width: (992px)) {
+//     @content;
+//   }
+// }
+
+// @mixin small-tablet {
+//   @media (max-width: (768px)) {
+//     @content;
+//   }
+// }
+
+// @mixin mobile {
+//   @media (max-width: (576px)) {
+//     @content;
+//   }
+// }
+
+$breakpoints: (
+  small-mobile: 320px,
+  mobile: 576px,
+  small-tablet: 768px,
+  tablet: 992px,
+  laptop: 1200px,
+  desktop: 1440px
+);
+
+@mixin breakpoint($breakpoint, $direction) {
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    @if $direction == max {
+      @media (max-width: ($breakpoint-value - 1)) {
+        @content;
+      }
+    } @else if $direction == min {
+      @media (min-width: $breakpoint-value) {
+        @content;
+      }
+    } @else {
+      @media ($direction: $breakpoint-value) {
+        @content
+      }
+    }
+
+  } @else {
+    @if $direction == max {
+      @media (max-width: $breakpoint) {
+        @content;
+      }
+    } @else if $direction == min {
+      @media (min-width: $breakpoint) {
+        @content;
+      }
+    } @else {
+      @media ($direction: $breakpoint) {
+        @content
+      }
+    }
+  }
+}
